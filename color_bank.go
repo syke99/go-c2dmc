@@ -1,5 +1,5 @@
 // Bank of colors who's rbg values already correspond to DMC string color values
-// These values are used in dmc_calc.go to find the closest matching dmc color to
+// These values are used in dmc.go to find the closest matching dmc color to
 // the given rgb value
 package dmc
 
@@ -12,9 +12,14 @@ type DefColor struct {
 	B         string
 }
 
+type DmcColors struct {
+	ColorBank []DefColor
+	HexMap    map[string]string
+}
+
 var colorBank []DefColor
 
-func FillColorBank() []DefColor {
+func FillColorBank() *DmcColors {
 
 	// TODO: Create scraper to scrape values from
 	// threadcolors.com and unmarshal into colorBank
@@ -62,5 +67,14 @@ func FillColorBank() []DefColor {
 		},
 	}
 
-	return colorBank
+	colorMap := make(map[string]string)
+
+	for _, c := range colorBank {
+		colorMap[c.Hex] = c.ColorName
+	}
+
+	return &DmcColors{
+		ColorBank: colorBank,
+		HexMap:    colorMap,
+	}
 }
