@@ -18,7 +18,7 @@ How do I use go-c2dmc?
 ====
 
 ### Installing
-Installing the library is as easy as
+To install go-c2dmc, simply run
 
 ```bash
 $ go get github.com/syke99/go-c2dmc
