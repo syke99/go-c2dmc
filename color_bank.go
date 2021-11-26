@@ -3,89 +3,64 @@
 // the given rgb value
 package dmc
 
-func FillColorBank() [][]string {
+type DefColor struct {
+	ColorName string
+	Floss     string
+	Hex       string
+	R         string
+	G         string
+	B         string
+}
 
-	var colorBank [][]string
+var colorBank []DefColor
 
-	// Salmon very light
-	svl := []string{"255", "226", "225", "Salmon Very Light", "3713"}
-	colorBank = append(colorBank, svl)
+func FillColorBank() []DefColor {
 
-	// Salmon light
-	sl := []string{"255", "201", "201", "Salmon Light", "761"}
-	colorBank = append(colorBank, sl)
-
-	// Salmon
-	s := []string{"245", "173", "173", "Salmon", "760"}
-	colorBank = append(colorBank, s)
-
-	// Salmon Medium
-	sm := []string{"241", "135", "135", "Salmon Medium", "3712"}
-	colorBank = append(colorBank, sm)
-
-	// Salmon Dark
-	sd := []string{"277", "109", "109", "Salmon Dark", "3328"}
-	colorBank = append(colorBank, sd)
-
-	// Salmon Very Dark
-	svd := []string{"191", "45", "45", "Salmon Very Dark", "347"}
-	colorBank = append(colorBank, svd)
-
-	// Peach
-	p := []string{"254", "215", "204", "Peach", "353"}
-	colorBank = append(colorBank, p)
-
-	// Coral Light
-	cl := []string{"253", "156", "151", "Coral Light", "352"}
-	colorBank = append(colorBank, cl)
-
-	// Coral
-	c := []string{"233", "106", "103", "Coral", "351"}
-	colorBank = append(colorBank, c)
-
-	// Coral Medium
-	cm := []string{"224", "72", "72", "Coral Medium", "350"}
-	colorBank = append(colorBank, cm)
-
-	// Coral Dark
-	cd := []string{"210", "16", "53", "Coral Dark", "349"}
-	colorBank = append(colorBank, cd)
-
-	// Coral Red Very Dark
-	crvd := []string{"187", "5", "31", "Coral Red Very Dark", "817"}
-	colorBank = append(colorBank, crvd)
-
-	// Melon Light
-	ml := []string{"255", "203", "213", "Melon Light", "3708"}
-	colorBank = append(colorBank, ml)
-
-	// Melon Medium
-	mm := []string{"255", "173", "188", "Melon Medium", "3706"}
-	colorBank = append(colorBank, mm)
-
-	// Melon Dark
-	md := []string{"255", "121", "146", "Melon Dark", "3705"}
-	colorBank = append(colorBank, md)
-
-	// Melon Very Dark
-	mvd := []string{"231", "73", "103", "Melon Very Dark", "3801"}
-	colorBank = append(colorBank, mvd)
-
-	// Bright Red
-	br := []string{"227", "29", "66", "Bright Red", "666"}
-	colorBank = append(colorBank, br)
-
-	// Red
-	r := []string{"199", "43", "59", "Red", "321"}
-	colorBank = append(colorBank, r)
-
-	// Red Medium
-	rm := []string{"183", "31", "51", "Red Medium", "304"}
-	colorBank = append(colorBank, rm)
-
-	// Red Dark
-	rd := []string{"167", "19", "43", "Red Dark", "498"}
-	colorBank = append(colorBank, rd)
+	// TODO: Create scraper to scrape values from
+	// threadcolors.com and unmarshal into colorBank
+	// (All values below pulled from threadcolors.com)
+	colorBank = []DefColor{
+		{
+			ColorName: "Salmon Very Light",
+			Floss:     "3713",
+			Hex:       "ffe2e2",
+			R:         "255",
+			G:         "226",
+			B:         "225",
+		},
+		{
+			ColorName: "Salmon Light",
+			Floss:     "761",
+			Hex:       "ffc9c9",
+			R:         "255",
+			G:         "201",
+			B:         "201",
+		},
+		{
+			ColorName: "Salmon",
+			Floss:     "760",
+			Hex:       "f5adad",
+			R:         "245",
+			G:         "173",
+			B:         "173",
+		},
+		{
+			ColorName: "Salmon Medium",
+			Floss:     "3712",
+			Hex:       "f18787",
+			R:         "241",
+			G:         "135",
+			B:         "135",
+		},
+		{
+			ColorName: "Salmon Dark",
+			Floss:     "3328",
+			Hex:       "e36d6d",
+			R:         "277",
+			G:         "109",
+			B:         "109",
+		},
+	}
 
 	return colorBank
 }
