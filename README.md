@@ -10,7 +10,7 @@ What?
 go-c2dmc is a go package that allow a developer calculate the closest (if not exact) match to DMC color threads. The ColorBank is populated with values matching DMC color threads (and their floss numbers) to RBG and Hexcode values already calculated by threadcolors.com go-c2dmc can calculate the closest match from this list with any provided RGB, HSV, LAB, or Hexcode values by calculating the distance in LAB colorspace using the amazing [go-colorful](https://github.com/lucasb-eyer/go-colorful/) package.
 
 
-For Mor information regarding the accuracy of these calculations specific to each colorspace, please refer to the go-colorful README
+For more information regarding the accuracy of these calculations specific to each colorspace, please refer to the go-colorful README
 
 
 
