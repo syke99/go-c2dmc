@@ -21,13 +21,13 @@ How do I use go-c2dmc?
 Installing the library is as easy as
 
 ```bash
-$ go get github.com/lucasb-eyer/go-colorful
+$ go get github.com/syke99/go-c2dmc
 ```
 
-The package can then be used through an
+Then you can import the package in any go file you'd like
 
 ```go
-import "github.com/lucasb-eyer/go-colorful"
+import "github.com/syke99/go-c2dmc"
 ```
 
 ### Basic usage
