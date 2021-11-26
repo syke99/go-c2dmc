@@ -15,20 +15,34 @@ func (d *DmcColors) RgbToDmc(r float64, g float64, b float64) (string, string) {
 	// ic is Color struct holding the RGB values passed in to RgbToDmc
 	ic := colorful.Color{R: r, G: g, B: b}
 
-	for _, c := range d.ColorBank {
+	// Search for hex in d.HexMap. If it exists, loop through
+	// d.ColorBank for the color name and floss number
+	hex := ic.Hex()
 
-		red, _ := strconv.Atoi(c.R)
-		green, _ := strconv.Atoi(c.G)
-		blue, _ := strconv.Atoi(c.B)
+	if val, ok := d.HexMap[hex]; ok {
+		for _, c := range d.ColorBank {
+			if c.ColorName == val {
+				return c.ColorName, c.Floss
+			}
+		}
+		// Otherwise, use the hex value to create a new colorful.Color
+		// and search through the d.ColorBank for the closest match (in L*a*b colorspace)
+	} else {
+		for _, c := range d.ColorBank {
 
-		// tc is Color struct holding the RGB values of each color in the
-		// color bank to test how close it is to ic
-		tc := colorful.Color{R: float64(red), G: float64(green), B: float64(blue)}
+			red, _ := strconv.Atoi(c.R)
+			green, _ := strconv.Atoi(c.G)
+			blue, _ := strconv.Atoi(c.B)
 
-		if dis == 0 || (ic.DistanceLab(tc) < dis) {
-			dis = ic.DistanceLab(tc)
-			dmc = c.ColorName
-			floss = c.Floss
+			// tc is Color struct holding the RGB values of each color in the
+			// color bank to test how close it is to ic
+			tc := colorful.Color{R: float64(red), G: float64(green), B: float64(blue)}
+
+			if dis == 0 || (ic.DistanceLab(tc) < dis) {
+				dis = ic.DistanceLab(tc)
+				dmc = c.ColorName
+				floss = c.Floss
+			}
 		}
 	}
 

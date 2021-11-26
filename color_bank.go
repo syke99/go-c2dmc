@@ -28,7 +28,7 @@ func FillColorBank() *DmcColors {
 		{
 			ColorName: "Salmon Very Light",
 			Floss:     "3713",
-			Hex:       "ffe2e2",
+			Hex:       "#ffe2e2",
 			R:         "255",
 			G:         "226",
 			B:         "225",
@@ -36,7 +36,7 @@ func FillColorBank() *DmcColors {
 		{
 			ColorName: "Salmon Light",
 			Floss:     "761",
-			Hex:       "ffc9c9",
+			Hex:       "#ffc9c9",
 			R:         "255",
 			G:         "201",
 			B:         "201",
@@ -44,7 +44,7 @@ func FillColorBank() *DmcColors {
 		{
 			ColorName: "Salmon",
 			Floss:     "760",
-			Hex:       "f5adad",
+			Hex:       "#f5adad",
 			R:         "245",
 			G:         "173",
 			B:         "173",
@@ -52,7 +52,7 @@ func FillColorBank() *DmcColors {
 		{
 			ColorName: "Salmon Medium",
 			Floss:     "3712",
-			Hex:       "f18787",
+			Hex:       "#f18787",
 			R:         "241",
 			G:         "135",
 			B:         "135",
@@ -60,7 +60,7 @@ func FillColorBank() *DmcColors {
 		{
 			ColorName: "Salmon Dark",
 			Floss:     "3328",
-			Hex:       "e36d6d",
+			Hex:       "#e36d6d",
 			R:         "277",
 			G:         "109",
 			B:         "109",
