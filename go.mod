@@ -1,4 +1,4 @@
-module github.com/syke99/go-rgb2dmc
+module github.com/syke99/go-c2dmc
 
 go 1.17
 
