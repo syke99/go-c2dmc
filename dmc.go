@@ -6,7 +6,7 @@ func NewColorBank() *DmcColors {
 
 	var cb *DmcColors
 
-	cb = FillColorBank()
+	cb = fillColorBank()
 
 	return cb
 }
