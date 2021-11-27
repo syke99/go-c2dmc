@@ -75,15 +75,18 @@ func (d *DmcColors) LabHex(l float64, a float64, b float64) string {
 	return d.LabToHex(l, a, b)
 }
 
+// The methods below for convertiong from Hex to RGB/LAB/HSV colorspaces
+// currently not working. Will be implemented in v2
+
 // Converting from Hex values
-func (d *DmcColors) HexRgb(hex string) (float64, float64, float64) {
-	return d.HexToRgb(hex)
-}
+// func (d *DmcColors) HexRgb(hex string) (float64, float64, float64) {
+// 	return d.HexToRgb(hex)
+// }
 
-func (d *DmcColors) HexHsv(hex string) (float64, float64, float64) {
-	return d.HexToHsv(hex)
-}
+// func (d *DmcColors) HexHsv(hex string) (float64, float64, float64) {
+// 	return d.HexToHsv(hex)
+// }
 
-func (d *DmcColors) HexLab(hex string) (float64, float64, float64) {
-	return d.HexToLab(hex)
-}
+// func (d *DmcColors) HexLab(hex string) (float64, float64, float64) {
+// 	return d.HexToLab(hex)
+// }
