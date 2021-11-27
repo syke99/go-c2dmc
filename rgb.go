@@ -15,7 +15,7 @@ func (d *DmcColors) RgbToDmc(r float64, g float64, b float64) (string, string) {
 	// ic is Color struct holding the RGB values passed in to RgbToDmc
 	ic := colorful.Color{R: r, G: g, B: b}
 
-	// Search for hex in d.HexMap. If it exists, loop through
+	// Search for hex in d.HexMap to check for exact matches. If it exists, loop through
 	// d.ColorBank for the color name and floss number
 	hex := ic.Hex()
 
@@ -50,6 +50,7 @@ func (d *DmcColors) RgbToDmc(r float64, g float64, b float64) (string, string) {
 
 }
 
+// Convenience functions for convertion RGB colors to other color spaces
 func (d *DmcColors) RgbToLab(r float64, g float64, b float64) (float64, float64, float64) {
 	c := colorful.Color{R: r, G: g, B: b}
 

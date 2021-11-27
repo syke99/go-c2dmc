@@ -15,7 +15,7 @@ func (d *DmcColors) HsvToDmc(h float64, s float64, v float64) (string, string) {
 	// ic is Color struct holding the HSV values passed in to RgbToDmc
 	ic := colorful.Hsv(h, s, v)
 
-	// Search for hex in d.HexMap. If it exists, loop through
+	// Search for hex in d.HexMap to check for exact matches. If it exists, loop through
 	// d.ColorBank for the color name and floss number
 	hex := ic.Hex()
 
@@ -50,6 +50,7 @@ func (d *DmcColors) HsvToDmc(h float64, s float64, v float64) (string, string) {
 
 }
 
+// Convenience functions for convertion HSV colors to other color spaces
 func (d *DmcColors) HsvToRgb(h float64, s float64, v float64) (float64, float64, float64) {
 	c := colorful.Hsv(h, s, v)
 

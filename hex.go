@@ -14,7 +14,7 @@ func (d *DmcColors) HexToDmc(hex string) (string, string) {
 	var dmc string
 	var floss string
 
-	// Search for hex in d.HexMap. If it exists, loop through
+	// Search for hex in d.HexMap to check for exact matches. If it exists, loop through
 	// d.ColorBank for the color name and floss number
 	if val, ok := d.HexMap[hex]; ok {
 		for _, c := range d.ColorBank {
@@ -57,6 +57,7 @@ func (d *DmcColors) HexToDmc(hex string) (string, string) {
 
 }
 
+// Convenience functions for convertion Hexcode color values to other color spaces
 func (d *DmcColors) HexToRgb(hex string) (float64, float64, float64) {
 	c, err := colorful.Hex(hex)
 	if err != nil {
