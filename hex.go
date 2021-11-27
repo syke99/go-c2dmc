@@ -1,7 +1,6 @@
 package dmc
 
 import (
-	"fmt"
 	"log"
 	"strconv"
 
@@ -25,8 +24,7 @@ func (d *DmcColors) HexToDmc(hex string) (string, string) {
 		// Otherwise, use the hex value to create a new colorful.Color
 		// and search through the d.ColorBank for the closest match (in L*a*b colorspace)
 	} else {
-		colorHex := fmt.Sprintf("#%s", hex)
-		hc, err := colorful.Hex(colorHex)
+		hc, err := colorful.Hex(hex)
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -56,6 +54,9 @@ func (d *DmcColors) HexToDmc(hex string) (string, string) {
 	return dmc, floss
 
 }
+
+// Below methods for converting Hex to RGB/LAB/HSV colorspaces currently not
+// working. Will be implemented in v2
 
 // Convenience functions for convertion Hexcode color values to other color spaces
 func (d *DmcColors) HexToRgb(hex string) (float64, float64, float64) {

@@ -34,9 +34,16 @@ func (d *DmcColors) LabToDmc(l float64, a float64, b float64) (string, string) {
 			green, _ := strconv.Atoi(c.G)
 			blue, _ := strconv.Atoi(c.B)
 
-			// tc is Color struct holding the Lab values of each color in the
+			// tempc is a temporary colorful.Color struct holding the rgb values of
+			// each color in the the colorBank so they can be converted to lab colorspace
+			// values and tested for distance between colors
+			tempc := colorful.Color{R: float64(red), G: float64(green), B: float64(blue)}
+
+			l, a, b := tempc.Lab()
+
+			// tc is colorful.Color struct holding the Lab values of each color in the
 			// color bank to test how close it is to ic
-			tc := colorful.Lab(float64(red), float64(green), float64(blue))
+			tc := colorful.Lab(l, a, b)
 
 			if dis == 0 || (ic.DistanceLab(tc) < dis) {
 				dis = ic.DistanceLab(tc)

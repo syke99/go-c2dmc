@@ -26,6 +26,11 @@ func (d *DmcColors) Hsv(h float64, s float64, v float64) (string, string) {
 	return d.HsvToDmc(h, s, v)
 }
 
+// Determine DMC color from HSV (Hue, Saturation, Value) values
+func (d *DmcColors) Lab(l float64, a float64, b float64) (string, string) {
+	return d.LabToDmc(l, a, b)
+}
+
 // For convenience's sake, dmc provides the below functions for converting the four
 // used colorspaces/hex value into the three other colorspaces used in this package/hex values.
 // For a larger availability of colorspaces to change to and from, reference

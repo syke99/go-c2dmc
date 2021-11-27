@@ -15,6 +15,11 @@ func (d *DmcColors) RgbToDmc(r float64, g float64, b float64) (string, string) {
 	// ic is Color struct holding the RGB values passed in to RgbToDmc
 	ic := colorful.Color{R: r, G: g, B: b}
 
+	// col is a colorful.Color struct holding the lab values of the passed in
+	// hsv colorspace values for testing agains colors in the colorBank
+	x, y, z := ic.Lab()
+	col := colorful.Lab(x, y, z)
+
 	// Search for hex in d.HexMap to check for exact matches. If it exists, loop through
 	// d.ColorBank for the color name and floss number
 	hex := ic.Hex()
@@ -34,12 +39,19 @@ func (d *DmcColors) RgbToDmc(r float64, g float64, b float64) (string, string) {
 			green, _ := strconv.Atoi(c.G)
 			blue, _ := strconv.Atoi(c.B)
 
-			// tc is Color struct holding the RGB values of each color in the
-			// color bank to test how close it is to ic
-			tc := colorful.Color{R: float64(red), G: float64(green), B: float64(blue)}
+			// tempc is a temporary colorful.Color struct holding the rgb values of
+			// each color in the the colorBank so they can be converted to lab colorspace
+			// values and tested for distance between colors
+			tempc := colorful.Color{R: float64(red), G: float64(green), B: float64(blue)}
 
-			if dis == 0 || (ic.DistanceLab(tc) < dis) {
-				dis = ic.DistanceLab(tc)
+			l, a, b := tempc.Lab()
+
+			// tc is colorful.Color struct holding the Lab values of each color in the
+			// color bank to test how close it is to ic
+			tc := colorful.Lab(l, a, b)
+
+			if dis == 0 || (col.DistanceLab(tc) < dis) {
+				dis = col.DistanceLab(tc)
 				dmc = c.ColorName
 				floss = c.Floss
 			}
@@ -50,7 +62,6 @@ func (d *DmcColors) RgbToDmc(r float64, g float64, b float64) (string, string) {
 
 }
 
-// Convenience functions for convertion RGB colors to other color spaces
 func (d *DmcColors) RgbToLab(r float64, g float64, b float64) (float64, float64, float64) {
 	c := colorful.Color{R: r, G: g, B: b}
 

@@ -3,6 +3,12 @@
 // the given rgb value
 package dmc
 
+import (
+	"strconv"
+
+	"github.com/lucasb-eyer/go-colorful"
+)
+
 type DefColor struct {
 	ColorName string
 	Floss     string
@@ -21,6 +27,8 @@ var colorBank []DefColor
 
 func fillColorBank() *DmcColors {
 
+	// TODO: update hexcode values to values that would be returned from (colorful.Color).Hex()
+	// v2 will implement a webscraper to scrape values from threadcolors.com instead
 	colorBank = []DefColor{
 		{ColorName: "Salmon Very Light", Floss: "3713", Hex: "#ffe2e2", R: "255", G: "226", B: "226"}, {ColorName: "Salmon Light", Floss: "761", Hex: "#ffc9c9", R: "255", G: "201", B: "201"}, {ColorName: "Salmon", Floss: "760", Hex: "#f5adad", R: "245", G: "173", B: "173"}, {ColorName: "Salmon Medium", Floss: "3712", Hex: "#f18787", R: "241", G: "135", B: "135"}, {ColorName: "Salmon Dark", Floss: "3328", Hex: "#e36d6d", R: "227", G: "109", B: "109"}, {ColorName: "Salmon Very Dark", Floss: "347", Hex: "#bf2d2d", R: "191", G: "45", B: "45"}, {ColorName: "Peach", Floss: "353", Hex: "#fed7cc", R: "254", G: "215",
 			B: "204"}, {ColorName: "Coral Light", Floss: "352", Hex: "#fd9c97", R: "253", G: "156", B: "151"}, {ColorName: "Coral", Floss: "351", Hex: "#e96a67", R: "233", G: "106", B: "103"}, {ColorName: "Coral Medium", Floss: "350", Hex: "#e04848", R: "224", G: "72", B: "72"}, {ColorName: "Coral Dark", Floss: "349", Hex: "#d21035", R: "210", G: "16", B: "53"}, {ColorName: "Coral Red Very Dark", Floss: "817", Hex: "#bb051f", R: "187", G: "5", B: "31"}, {ColorName: "Melon Light", Floss: "3708", Hex: "#ffcbd5", R: "255", G: "203", B: "213"}, {ColorName: "Melon Medium", Floss: "3706", Hex: "#ffadbc", R: "255", G: "173", B: "188"}, {ColorName: "Melon Dark", Floss: "3705", Hex: "#ff7992", R: "255", G: "121", B: "146"}, {ColorName: "Melon Very Dark", Floss: "3801", Hex: "#e74967", R: "231", G: "73", B: "103"}, {ColorName: "Bright Red", Floss: "666", Hex: "#e31d42", R: "227", G: "29", B: "66"}, {ColorName: "Red", Floss: "321", Hex: "#c72b3b", R: "199", G: "43", B: "59"}, {ColorName: "Red Medium", Floss: "304", Hex: "#b71f33", R: "183", G: "31", B: "51"}, {ColorName: "Red Dark", Floss: "498", Hex: "#a7132b", R: "167", G: "19", B: "43"}, {ColorName: "Garnet", Floss: "816", Hex: "#970b23", R: "151", G: "11", B: "35"}, {ColorName: "Garnet Medium", Floss: "815", Hex: "#87071f", R: "135", G: "7", B: "31"}, {ColorName: "Garnet Dark", Floss: "814", Hex: "#7b001b", R: "123", G: "0", B: "27"}, {ColorName: "Carnation Very Light", Floss: "894", Hex: "#ffb2bb", R: "255", G: "178", B: "187"}, {ColorName: "Carnation Light", Floss: "893", Hex: "#fc90a2", R: "252", G: "144", B: "162"}, {ColorName: "Carnation Medium", Floss: "892", Hex: "#ff798c", R: "255", G: "121", B: "140"}, {ColorName: "Carnation Dark", Floss: "891", Hex: "#ff5773", R: "255", G: "87", B: "115"}, {ColorName: "Baby Pink", Floss: "818", Hex: "#ffdfd9", R: "255", G: "223",
@@ -52,7 +60,14 @@ func fillColorBank() *DmcColors {
 	colorMap := make(map[string]string)
 
 	for _, c := range colorBank {
-		colorMap[c.Hex] = c.ColorName
+
+		red, _ := strconv.Atoi(c.R)
+		green, _ := strconv.Atoi(c.G)
+		blue, _ := strconv.Atoi(c.B)
+
+		crgb := colorful.Color{R: float64(red), G: float64(green), B: float64(blue)}
+		hex := crgb.Hex()
+		colorMap[hex] = c.ColorName
 	}
 
 	return &DmcColors{
