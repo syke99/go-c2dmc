@@ -19,7 +19,7 @@ type DmcColors struct {
 
 var colorBank []DefColor
 
-func FillColorBank() *DmcColors {
+func fillColorBank() *DmcColors {
 
 	colorBank = []DefColor{
 		{ColorName: "Salmon Very Light", Floss: "3713", Hex: "#ffe2e2", R: "255", G: "226", B: "226"}, {ColorName: "Salmon Light", Floss: "761", Hex: "#ffc9c9", R: "255", G: "201", B: "201"}, {ColorName: "Salmon", Floss: "760", Hex: "#f5adad", R: "245", G: "173", B: "173"}, {ColorName: "Salmon Medium", Floss: "3712", Hex: "#f18787", R: "241", G: "135", B: "135"}, {ColorName: "Salmon Dark", Floss: "3328", Hex: "#e36d6d", R: "227", G: "109", B: "109"}, {ColorName: "Salmon Very Dark", Floss: "347", Hex: "#bf2d2d", R: "191", G: "45", B: "45"}, {ColorName: "Peach", Floss: "353", Hex: "#fed7cc", R: "254", G: "215",
