@@ -2,6 +2,8 @@
 
 package dmc
 
+import "image/color"
+
 func NewColorBank() *DmcColors {
 
 	var cb *DmcColors
@@ -9,6 +11,11 @@ func NewColorBank() *DmcColors {
 	cb = fillColorBank()
 
 	return cb
+}
+
+// Determine DMC color from RBG (Red, Green, Blue) values
+func (d *DmcColors) RgbA(col color.Color) (float64, float64, float64) {
+	return d.RgbaToRgb(col)
 }
 
 // Determine DMC color from RBG (Red, Green, Blue) values
