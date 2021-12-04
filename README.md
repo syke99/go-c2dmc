@@ -1,4 +1,7 @@
 # go-c2dmc
+[![Go Reference](https://pkg.go.dev/badge/github.com/syke99/go-c2dmc.svg)](https://pkg.go.dev/github.com/syke99/go-c2dmc)
+[![go reportcard](https://goreportcard.com/badge/github.com/syke99/go-c2dmc)](https://goreportcard.com/report/github.com/syke99/go-c2dmc)
+
 A Go package for converting RGB and other color formats/colorspaces into DMC thread colors (DMC color name and floss number). Implemented as a wrapper for a handful of pieces of functionality from the  [go-colorful](https://github.com/lucasb-eyer/go-colorful/) package with additional functionality to return DMC thread colors. Supports Go 1.13 onwards.
 
 Why was go-c2dmc built?
