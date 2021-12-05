@@ -30,7 +30,7 @@ $ go get github.com/syke99/go-c2dmc
 Then you can import the package in any go file you'd like
 
 ```go
-import "github.com/syke99/go-c2dmc"
+import dmc "github.com/syke99/go-c2dmc"
 ```
 
 ### Basic usage
