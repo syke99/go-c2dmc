@@ -8,7 +8,6 @@ import (
 
 func (d *DmcColors) HsvToDmc(h float64, s float64, v float64) (string, string) {
 
-	var dis float64
 	var dmc string
 	var floss string
 
@@ -51,8 +50,7 @@ func (d *DmcColors) HsvToDmc(h float64, s float64, v float64) (string, string) {
 			// color bank to test how close it is to ic
 			tc := colorful.Lab(l, a, b)
 
-			if dis == 0 || (col.DistanceLab(tc) < dis) {
-				dis = col.DistanceLab(tc)
+			if col.DistanceLab(tc) == 0 {
 				dmc = c.ColorName
 				floss = c.Floss
 			}
