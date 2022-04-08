@@ -8,7 +8,6 @@ import (
 
 func (d *DmcColors) RgbToDmc(r float64, g float64, b float64) (string, string) {
 
-	var dis float64
 	var dmc string
 	var floss string
 
@@ -50,8 +49,7 @@ func (d *DmcColors) RgbToDmc(r float64, g float64, b float64) (string, string) {
 			// color bank to test how close it is to ic
 			tc := colorful.Lab(l, a, b)
 
-			if dis == 0 || (col.DistanceLab(tc) < dis) {
-				dis = col.DistanceLab(tc)
+			if col.DistanceLab(tc) == 0 {
 				dmc = c.ColorName
 				floss = c.Floss
 			}
