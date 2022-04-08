@@ -6,9 +6,7 @@ import "image/color"
 
 func NewColorBank() *DmcColors {
 
-	var cb *DmcColors
-
-	cb = fillColorBank()
+	cb := fillColorBank()
 
 	return cb
 }

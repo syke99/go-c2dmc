@@ -3,12 +3,6 @@
 // the given rgb value
 package dmc
 
-import (
-	"strconv"
-
-	"github.com/lucasb-eyer/go-colorful"
-)
-
 type DefColor struct {
 	ColorName string
 	Floss     string
@@ -59,14 +53,7 @@ func fillColorBank() *DmcColors {
 	colorMap := make(map[string]string)
 
 	for _, c := range colorBank {
-
-		red, _ := strconv.Atoi(c.R)
-		green, _ := strconv.Atoi(c.G)
-		blue, _ := strconv.Atoi(c.B)
-
-		crgb := colorful.Color{R: float64(red), G: float64(green), B: float64(blue)}
-		hex := crgb.Hex()
-		colorMap[hex] = c.ColorName
+		colorMap[c.Hex] = c.ColorName
 	}
 
 	return &DmcColors{

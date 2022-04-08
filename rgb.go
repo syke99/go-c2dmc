@@ -8,16 +8,12 @@ import (
 
 func (d *DmcColors) RgbToDmc(r float64, g float64, b float64) (string, string) {
 
+	var previousDistance float64
 	var dmc string
 	var floss string
 
 	// ic is Color struct holding the RGB values passed in to RgbToDmc
 	ic := colorful.Color{R: r, G: g, B: b}
-
-	// col is a colorful.Color struct holding the lab values of the passed in
-	// hsv colorspace values for testing agains colors in the colorBank
-	x, y, z := ic.Lab()
-	col := colorful.Lab(x, y, z)
 
 	// Search for hex in d.HexMap to check for exact matches. If it exists, loop through
 	// d.ColorBank for the color name and floss number
@@ -49,7 +45,7 @@ func (d *DmcColors) RgbToDmc(r float64, g float64, b float64) (string, string) {
 			// color bank to test how close it is to ic
 			tc := colorful.Lab(l, a, b)
 
-			if col.DistanceLab(tc) == 0 {
+			if previousDistance == 0 || ic.DistanceLab(tc) < previousDistance {
 				dmc = c.ColorName
 				floss = c.Floss
 			}

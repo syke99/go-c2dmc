@@ -9,6 +9,7 @@ import (
 
 func (d *DmcColors) HexToDmc(hex string) (string, string) {
 
+	var dis float64
 	var dmc string
 	var floss string
 
@@ -41,7 +42,8 @@ func (d *DmcColors) HexToDmc(hex string) (string, string) {
 			// color bank to test how close it is to ic
 			tc := colorful.Color{R: float64(red), G: float64(green), B: float64(blue)}
 
-			if ic.DistanceLab(tc) == 0 {
+			if ic.DistanceLab(tc) == 0 || (ic.DistanceLab(tc) < dis) {
+				dis = ic.DistanceLab(tc)
 				dmc = c.ColorName
 				floss = c.Floss
 			}
