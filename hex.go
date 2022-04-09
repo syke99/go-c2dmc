@@ -9,7 +9,7 @@ import (
 
 func (d *DmcColors) HexToDmc(hex string) (string, string) {
 
-	var dis float64
+	var previousDistance float64
 	var dmc string
 	var floss string
 
@@ -32,7 +32,7 @@ func (d *DmcColors) HexToDmc(hex string) (string, string) {
 		// ic is Color struct holding the RGB values passed in to RgbToDmc
 		ic := colorful.Color{R: hc.R, G: hc.G, B: hc.B}
 
-		for _, c := range d.ColorBank {
+		for i, c := range d.ColorBank {
 
 			red, _ := strconv.Atoi(c.R)
 			green, _ := strconv.Atoi(c.G)
@@ -42,8 +42,21 @@ func (d *DmcColors) HexToDmc(hex string) (string, string) {
 			// color bank to test how close it is to ic
 			tc := colorful.Color{R: float64(red), G: float64(green), B: float64(blue)}
 
-			if ic.DistanceLab(tc) == 0 || (ic.DistanceCIEDE2000(tc) < dis) {
-				dis = ic.DistanceLab(tc)
+			if i == 0 {
+				previousDistance = ic.DistanceLab(tc)
+				dmc = c.ColorName
+				floss = c.Floss
+				continue
+			}
+
+			curDis := ic.DistanceLab(tc)
+
+			if curDis == 0 {
+				break
+			}
+
+			if curDis < previousDistance {
+				previousDistance = ic.DistanceLab(tc)
 				dmc = c.ColorName
 				floss = c.Floss
 			}

@@ -28,7 +28,7 @@ func (d *DmcColors) RgbToDmc(r float64, g float64, b float64) (string, string) {
 		// Otherwise, use the hex value to create a new colorful.Color
 		// and search through the d.ColorBank for the closest match (in L*a*b colorspace)
 	} else {
-		for _, c := range d.ColorBank {
+		for i, c := range d.ColorBank {
 
 			red, _ := strconv.Atoi(c.R)
 			green, _ := strconv.Atoi(c.G)
@@ -45,8 +45,21 @@ func (d *DmcColors) RgbToDmc(r float64, g float64, b float64) (string, string) {
 			// color bank to test how close it is to ic
 			tc := colorful.Lab(l, a, b)
 
-			if previousDistance == 0 || ic.DistanceLuv(tc) < previousDistance {
-				previousDistance = ic.DistanceLuv(tc)
+			if i == 0 {
+				previousDistance = ic.DistanceLab(tc)
+				dmc = c.ColorName
+				floss = c.Floss
+				continue
+			}
+
+			curDis := ic.DistanceLab(tc)
+
+			if curDis == 0 {
+				break
+			}
+
+			if curDis < previousDistance {
+				previousDistance = ic.DistanceLab(tc)
 				dmc = c.ColorName
 				floss = c.Floss
 			}
