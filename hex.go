@@ -43,20 +43,20 @@ func (d *DmcColors) HexToDmc(hex string) (string, string) {
 			tc := colorful.Color{R: float64(red), G: float64(green), B: float64(blue)}
 
 			if i == 0 {
-				previousDistance = ic.DistanceLab(tc)
+				previousDistance = ic.DistanceLuv(tc)
 				dmc = c.ColorName
 				floss = c.Floss
 				continue
 			}
 
-			curDis := ic.DistanceLab(tc)
+			curDis := ic.DistanceLuv(tc)
 
 			if curDis == 0 {
 				break
 			}
 
 			if curDis < previousDistance {
-				previousDistance = ic.DistanceLab(tc)
+				previousDistance = ic.DistanceLuv(tc)
 				dmc = c.ColorName
 				floss = c.Floss
 			}
