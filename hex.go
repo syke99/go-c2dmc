@@ -52,6 +52,8 @@ func (d *DmcColors) HexToDmc(hex string) (string, string) {
 			curDis := ic.DistanceLuv(tc)
 
 			if curDis == 0 {
+				dmc = c.ColorName
+				floss = c.Floss
 				break
 			}
 

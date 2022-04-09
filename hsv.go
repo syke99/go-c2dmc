@@ -56,6 +56,8 @@ func (d *DmcColors) HsvToDmc(h float64, s float64, v float64) (string, string) {
 			curDis := ic.DistanceLuv(tc)
 
 			if curDis == 0 {
+				dmc = c.ColorName
+				floss = c.Floss
 				break
 			}
 

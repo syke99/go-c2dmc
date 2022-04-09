@@ -55,6 +55,8 @@ func (d *DmcColors) RgbToDmc(r float64, g float64, b float64) (string, string) {
 			curDis := ic.DistanceLuv(tc)
 
 			if curDis == 0 {
+				dmc = c.ColorName
+				floss = c.Floss
 				break
 			}
 

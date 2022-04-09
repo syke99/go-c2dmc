@@ -19,9 +19,5 @@ func (d *DmcColors) RgbaToRgb(col color.Color) (float64, float64, float64) {
 
 	// retrieve the RGB values from c and
 	// return them
-	r := c.R
-	g := c.G
-	b := c.B
-
-	return r, g, b
+	return c.R, c.G, c.B
 }
