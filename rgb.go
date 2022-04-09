@@ -45,7 +45,7 @@ func (d *DmcColors) RgbToDmc(r float64, g float64, b float64) (string, string) {
 			// color bank to test how close it is to ic
 			tc := colorful.Lab(l, a, b)
 
-			if previousDistance == 0 || ic.DistanceLab(tc) < previousDistance {
+			if previousDistance == 0 || ic.DistanceCIEDE2000(tc) < previousDistance {
 				dmc = c.ColorName
 				floss = c.Floss
 			}

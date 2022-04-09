@@ -42,7 +42,7 @@ func (d *DmcColors) HexToDmc(hex string) (string, string) {
 			// color bank to test how close it is to ic
 			tc := colorful.Color{R: float64(red), G: float64(green), B: float64(blue)}
 
-			if ic.DistanceLab(tc) == 0 || (ic.DistanceLab(tc) < dis) {
+			if ic.DistanceLab(tc) == 0 || (ic.DistanceCIEDE2000(tc) < dis) {
 				dis = ic.DistanceLab(tc)
 				dmc = c.ColorName
 				floss = c.Floss
