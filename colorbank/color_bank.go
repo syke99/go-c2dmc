@@ -55,7 +55,7 @@ func fillColorBank() []pkg.DefColor {
 		println(err.Error())
 	}
 
-	println(doc.Find("tbody").Children().Each(func(i int, s *goquery.Selection) {
+	doc.Find("tbody").Children().Each(func(i int, s *goquery.Selection) {
 		if i >= 1 {
 			dc := pkg.DefColor{}
 			println(s.Children().Each(func(i int, s *goquery.Selection) {
@@ -76,7 +76,7 @@ func fillColorBank() []pkg.DefColor {
 			}))
 			colorBank = append(colorBank, dc)
 		}
-	}))
+	})
 
 	return colorBank
 }
