@@ -41,7 +41,7 @@ Calculate the closest DMC thread color based on provided RGB values
 // Initialize the ColorBank to have DMC colors to test against
 cb := dmc.NewColorBank()
 
-// Call dmc.Rgb() and pass in RGB values
+// Call dmc.Rgb() and pass in the color bank and RGB values
 color, floss := dmc.Rgb(cb, 245.0, 173.0, 173.0)
 
 fmt.SprintF("DMC Color Name: %s, Floss number: %s", color, floss)
