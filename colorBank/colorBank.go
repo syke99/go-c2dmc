@@ -1,31 +1,44 @@
-// Bank of colors who's rbg values already correspond to DMC string color values
+// Package colorBank provides a bank of colors who's rbg values already correspond to DMC string color values
 // These values are used in dmc.go to find the closest matching dmc color to
 // the given rgb value
-package dmc
+package colorBank
 
 import (
 	"net/http"
 
 	"github.com/PuerkitoBio/goquery"
+	"github.com/syke99/go-c2dmc/colorspaces"
+	"github.com/syke99/go-c2dmc/colorspaces/hex"
+	"github.com/syke99/go-c2dmc/colorspaces/hsv"
+	"github.com/syke99/go-c2dmc/colorspaces/lab"
+	"github.com/syke99/go-c2dmc/colorspaces/rgb"
 )
 
-type DefColor struct {
-	ColorName string
-	Floss     string
-	Hex       string
-	R         string
-	G         string
-	B         string
-}
-
 type DmcColors struct {
-	ColorBank []DefColor
+	ColorBank []colorspaces.DefColor
 	HexMap    map[string]string
+	Rgb       rgb.Rgb
+	Hex       hex.Hex
+	Hsv       hsv.Hsv
+	Lab       lab.Lab
 }
 
-func fillColorBank() *DmcColors {
+func New() *DmcColors {
+	cb := fillColorBank()
+	hm := fillHexMap(cb)
+	colors := &DmcColors{
+		ColorBank: cb,
+		HexMap:    hm,
+		Rgb:       rgb.Rgb{},
+		Hex:       hex.Hex{},
+		Hsv:       hsv.Hsv{},
+		Lab:       lab.Lab{},
+	}
+	return colors
+}
 
-	var colorBank []DefColor
+func fillColorBank() []colorspaces.DefColor {
+	var colorBank []colorspaces.DefColor
 
 	page := "https://floss.maxxmint.com/dmc_to_rgb.php"
 	resp, err := http.Get(page)
@@ -42,7 +55,7 @@ func fillColorBank() *DmcColors {
 
 	println(doc.Find("tbody").Children().Each(func(i int, s *goquery.Selection) {
 		if i == 1 {
-			dc := DefColor{}
+			dc := colorspaces.DefColor{}
 			println(s.Children().Each(func(i int, s *goquery.Selection) {
 				switch i {
 				case 1:
@@ -63,14 +76,16 @@ func fillColorBank() *DmcColors {
 		}
 	}))
 
+	return colorBank
+}
+
+func fillHexMap(colorBank []colorspaces.DefColor) map[string]string {
+
 	colorMap := make(map[string]string)
 
 	for _, c := range colorBank {
 		colorMap[c.Hex] = c.ColorName
 	}
 
-	return &DmcColors{
-		ColorBank: colorBank,
-		HexMap:    colorMap,
-	}
+	return colorMap
 }

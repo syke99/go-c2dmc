@@ -1,6 +1,7 @@
 package dmc
 
 import (
+	"github.com/syke99/go-c2dmc/colorBank"
 	"testing"
 
 	"github.com/stretchr/testify/suite"
@@ -20,12 +21,12 @@ func TestDmcTestSuite(t *testing.T) {
 }
 
 func (suite *DmcTestSuite) TestNewColorBank() {
-	suite.IsType(&DmcColors{}, NewColorBank())
+	suite.IsType(&colorBank.DmcColors{}, NewColorBank())
 }
 
 func (suite *DmcTestSuite) TestRgb() {
 	cb := NewColorBank()
-	n, f := cb.Rgb(245.0, 173.0, 173.0)
+	n, f := Rgb(cb, 245.0, 173.0, 173.0)
 	suite.Equal("Salmon", n)
 	suite.Equal("760", f)
 }
@@ -39,14 +40,14 @@ func (suite *DmcTestSuite) TestRgb() {
 
 func (suite *DmcTestSuite) TestHsv() {
 	cb := NewColorBank()
-	n, f := cb.Hsv(0.000000, 0.293878, 245.000000)
+	n, f := Hsv(cb, 0.000000, 0.293878, 245.000000)
 	suite.Equal("Salmon", n)
 	suite.Equal("760", f)
 }
 
 func (suite *DmcTestSuite) TestLab() {
 	cb := NewColorBank()
-	n, f := cb.Lab(74.286797, 22.545819, 9.144645)
+	n, f := Lab(cb, 74.286797, 22.545819, 9.144645)
 	suite.Equal("Salmon", n)
 	suite.Equal("760", f)
 }

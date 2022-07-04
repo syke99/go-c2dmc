@@ -1,27 +1,29 @@
-package dmc
+package lab
 
 import (
 	"strconv"
 
 	"github.com/lucasb-eyer/go-colorful"
+	"github.com/syke99/go-c2dmc/colorspaces"
 )
 
-func (d *DmcColors) HsvToDmc(h float64, s float64, v float64) (string, string) {
+type Lab struct{}
+
+func (d Lab) LabToDmc(cd []colorspaces.DefColor, hm map[string]string, l float64, a float64, b float64) (string, string) {
 
 	var previousDistance float64
 	var dmc string
 	var floss string
 
-	// ic is colorful.Color struct holding the HSV values passed in to RgbToDmc
-	// so it can be converted to lab colorspace and tested
-	ic := colorful.Hsv(h, s, v)
+	// ic is Color struct holding the Lab values passed in to LabToDmc
+	ic := colorful.Lab(l, a, b)
 
-	// Search for hex in d.HexMap to check for exact matches. If it exists, loop through
+	// Search for hex in hm to check for exact matches. If it exists, loop through
 	// d.ColorBank for the color name and floss number
 	hex := ic.Hex()
 
-	if val, ok := d.HexMap[hex]; ok {
-		for _, c := range d.ColorBank {
+	if val, ok := hm[hex]; ok {
+		for _, c := range cd {
 			if c.ColorName == val {
 				return c.ColorName, c.Floss
 			}
@@ -29,7 +31,7 @@ func (d *DmcColors) HsvToDmc(h float64, s float64, v float64) (string, string) {
 		// Otherwise, use the hex value to create a new colorful.Color
 		// and search through the d.ColorBank for the closest match (in L*a*b colorspace)
 	} else {
-		for i, c := range d.ColorBank {
+		for i, c := range cd {
 
 			red, _ := strconv.Atoi(c.R)
 			green, _ := strconv.Atoi(c.G)
@@ -73,9 +75,9 @@ func (d *DmcColors) HsvToDmc(h float64, s float64, v float64) (string, string) {
 
 }
 
-// Convenience functions for convertion HSV colors to other color spaces
-func (d *DmcColors) HsvToRgb(h float64, s float64, v float64) (float64, float64, float64) {
-	c := colorful.Hsv(h, s, v)
+// Convenience functions for convertion LAB colors to other color spaces
+func (d Lab) LabToRgb(l float64, a float64, b float64) (float64, float64, float64) {
+	c := colorful.Lab(l, a, b)
 
 	_r := c.R
 	_g := c.G
@@ -84,14 +86,14 @@ func (d *DmcColors) HsvToRgb(h float64, s float64, v float64) (float64, float64,
 	return _r, _g, _b
 }
 
-func (d *DmcColors) HsvToHex(h float64, s float64, v float64) string {
-	c := colorful.Hsv(h, s, v)
+func (d Lab) LabToHex(l float64, a float64, b float64) string {
+	c := colorful.Lab(l, a, b)
 
 	return c.Hex()
 }
 
-func (d *DmcColors) HsvToLab(h float64, s float64, v float64) (float64, float64, float64) {
-	c := colorful.Hsv(h, s, v)
+func (d Lab) LabToHsv(l float64, a float64, b float64) (float64, float64, float64) {
+	c := colorful.Lab(l, a, b)
 
-	return c.Lab()
+	return c.Hsv()
 }

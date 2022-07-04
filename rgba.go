@@ -6,7 +6,7 @@ import (
 	"github.com/lucasb-eyer/go-colorful"
 )
 
-func (d *DmcColors) RgbaToRgb(col color.Color) (float64, float64, float64) {
+func RgbaToRgb(col color.Color) (float64, float64, float64) {
 
 	// use the go-colorful package to
 	// return a colorful.Color that contains

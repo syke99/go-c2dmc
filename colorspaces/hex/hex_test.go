@@ -1,4 +1,4 @@
-package dmc
+package hex
 
 // Below tests will be implementd in v2 whenever HEX to RGB/LAB/HSV is functional
 

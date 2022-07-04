@@ -1,28 +1,31 @@
-package dmc
+package hex
 
 import (
 	"log"
 	"strconv"
 
 	"github.com/lucasb-eyer/go-colorful"
+	"github.com/syke99/go-c2dmc/colorspaces"
 )
 
-func (d *DmcColors) HexToDmc(hex string) (string, string) {
+type Hex struct{}
+
+func (d Hex) HexToDmc(cb []colorspaces.DefColor, hm map[string]string, hex string) (string, string) {
 
 	var previousDistance float64
 	var dmc string
 	var floss string
 
-	// Search for hex in d.HexMap to check for exact matches. If it exists, loop through
-	// d.ColorBank for the color name and floss number
-	if val, ok := d.HexMap[hex]; ok {
-		for _, c := range d.ColorBank {
+	// Search for hex in hm to check for exact matches. If it exists, loop through
+	// cb for the color name and floss number
+	if val, ok := hm[hex]; ok {
+		for _, c := range cb {
 			if c.ColorName == val {
 				return c.ColorName, c.Floss
 			}
 		}
 		// Otherwise, use the hex value to create a new colorful.Color
-		// and search through the d.ColorBank for the closest match (in L*a*b colorspace)
+		// and search through the cb for the closest match (in L*a*b colorspace)
 	} else {
 		hc, err := colorful.Hex(hex)
 		if err != nil {
@@ -32,7 +35,7 @@ func (d *DmcColors) HexToDmc(hex string) (string, string) {
 		// ic is Color struct holding the RGB values passed in to RgbToDmc
 		ic := colorful.Color{R: hc.R, G: hc.G, B: hc.B}
 
-		for i, c := range d.ColorBank {
+		for i, c := range cb {
 
 			red, _ := strconv.Atoi(c.R)
 			green, _ := strconv.Atoi(c.G)
@@ -74,7 +77,7 @@ func (d *DmcColors) HexToDmc(hex string) (string, string) {
 // working. Will be implemented in v2
 
 // Convenience functions for convertion Hexcode color values to other color spaces
-func (d *DmcColors) HexToRgb(hex string) (float64, float64, float64) {
+func (d Hex) HexToRgb(hex string) (float64, float64, float64) {
 	c, err := colorful.Hex(hex)
 	if err != nil {
 		log.Fatal(err)
@@ -87,7 +90,7 @@ func (d *DmcColors) HexToRgb(hex string) (float64, float64, float64) {
 	return _r, _g, _b
 }
 
-func (d *DmcColors) HexToHsv(hex string) (float64, float64, float64) {
+func (d Hex) HexToHsv(hex string) (float64, float64, float64) {
 	c, err := colorful.Hex(hex)
 	if err != nil {
 		log.Fatal(err)
@@ -96,7 +99,7 @@ func (d *DmcColors) HexToHsv(hex string) (float64, float64, float64) {
 	return c.Hsv()
 }
 
-func (d *DmcColors) HexToLab(hex string) (float64, float64, float64) {
+func (d Hex) HexToLab(hex string) (float64, float64, float64) {
 	c, err := colorful.Hex(hex)
 	if err != nil {
 		log.Fatal(err)
