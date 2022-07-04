@@ -17,12 +17,9 @@ type DmcColors struct {
 	HexMap    map[string]string
 }
 
-var colorBank []DefColor
-
 func fillColorBank() *DmcColors {
-
 	// v2 will implement a webscraper to scrape these values from threadcolors.com instead
-	colorBank = []DefColor{
+	colorBank := []DefColor{
 		{ColorName: "Salmon Very Light", Floss: "3713", Hex: "#ffe2e2", R: "255", G: "226", B: "226"},
 		{ColorName: "Salmon Light", Floss: "761", Hex: "#ffc9c9", R: "255", G: "201", B: "201"},
 		{ColorName: "Salmon", Floss: "760", Hex: "#f5adad", R: "245", G: "173", B: "173"},

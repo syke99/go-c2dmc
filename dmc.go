@@ -5,10 +5,7 @@ package dmc
 import "image/color"
 
 func NewColorBank() *DmcColors {
-
-	cb := fillColorBank()
-
-	return cb
+	return fillColorBank()
 }
 
 // Determine DMC color from RBG (Red, Green, Blue) values
