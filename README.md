@@ -41,8 +41,8 @@ Calculate the closest DMC thread color based on provided RGB values
 // Initialize the ColorBank to have DMC colors to test against
 cb := dmc.NewColorBank()
 
-// Call cb.Rgb() and pass in RGB values
-color, floss := Rgb(cb, 245.0, 173.0, 173.0)
+// Call dmc.Rgb() and pass in RGB values
+color, floss := dmc.Rgb(cb, 245.0, 173.0, 173.0)
 
 fmt.SprintF("DMC Color Name: %s, Floss number: %s", color, floss)
 ```
@@ -57,9 +57,9 @@ DMC Color Name: Salmon, Floss number: 760
 And then converting this RGB color into LAB and HSV colorspaces, as well as hexcode:
 
 ```go
-lab := RgbLab(cb, 245.0, 173.0, 173.0)
-hsv := RgbHsv(cb, 245.0, 173.0, 173.0)
-hexcode := RgbHex(cb, 245.0, 173.0, 173.0)
+lab := dmc.RgbLab(cb, 245.0, 173.0, 173.0)
+hsv := dmc.RgbHsv(cb, 245.0, 173.0, 173.0)
+hexcode := dmc.RgbHex(cb, 245.0, 173.0, 173.0)
 ```
 
 **!!NOTE!!**
