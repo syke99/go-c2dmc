@@ -1,39 +1,38 @@
-// TODO: Rename file to dmc.go
-
 package dmc
 
 import (
 	"image/color"
 
-	"github.com/syke99/go-c2dmc/colorbank"
+	cb "github.com/syke99/go-c2dmc/colorbank"
+	"github.com/syke99/go-c2dmc/internal/colorspaces"
 )
 
-func NewColorBank() *colorBank.DmcColors {
-	return colorBank.New()
+func NewColorBank() *cb.DmcColors {
+	return cb.New()
 }
 
 // RgbA Determine DMC color from RBG (Red, Green, Blue) values
 func RgbA(col color.Color) (float64, float64, float64) {
-	return RgbaToRgb(col)
+	return colorspaces.RgbaToRgb(col)
 }
 
 // Rgb Determine DMC color from RBG (Red, Green, Blue) values
-func Rgb(d *colorBank.DmcColors, r float64, g float64, b float64) (string, string) {
+func Rgb(d *cb.DmcColors, r float64, g float64, b float64) (string, string) {
 	return d.Rgb.RgbToDmc(d.ColorBank, d.HexMap, r, g, b)
 }
 
 // Hex Determine DMC color from Hex value
-func Hex(d *colorBank.DmcColors, hex string) (string, string) {
+func Hex(d *cb.DmcColors, hex string) (string, string) {
 	return d.Hex.HexToDmc(d.ColorBank, d.HexMap, hex)
 }
 
 // Hsv Determine DMC color from HSV (Hue, Saturation, Value) values
-func Hsv(d *colorBank.DmcColors, h float64, s float64, v float64) (string, string) {
+func Hsv(d *cb.DmcColors, h float64, s float64, v float64) (string, string) {
 	return d.Hsv.HsvToDmc(d.ColorBank, d.HexMap, h, s, v)
 }
 
 // Lab Determine DMC color from HSV (Hue, Saturation, Value) values
-func Lab(d *colorBank.DmcColors, l float64, a float64, b float64) (string, string) {
+func Lab(d *cb.DmcColors, l float64, a float64, b float64) (string, string) {
 	return d.Lab.LabToDmc(d.ColorBank, d.HexMap, l, a, b)
 }
 
@@ -43,47 +42,47 @@ func Lab(d *colorBank.DmcColors, l float64, a float64, b float64) (string, strin
 // the package github.com/lucasb-eyer/go-colorful
 
 // RgbHex Converting from Rgb to Hex
-func RgbHex(d *colorBank.DmcColors, r float64, g float64, b float64) string {
+func RgbHex(d *cb.DmcColors, r float64, g float64, b float64) string {
 	return d.Rgb.RgbToHex(r, g, b)
 }
 
 // RgbHsv Converting from Rgb to Hsv
-func RgbHsv(d *colorBank.DmcColors, r float64, g float64, b float64) (float64, float64, float64) {
+func RgbHsv(d *cb.DmcColors, r float64, g float64, b float64) (float64, float64, float64) {
 	return d.Rgb.RgbToHsv(r, g, b)
 }
 
 // RgbLab Converting from Rgb to Lab
-func RgbLab(d *colorBank.DmcColors, r float64, g float64, b float64) (float64, float64, float64) {
+func RgbLab(d *cb.DmcColors, r float64, g float64, b float64) (float64, float64, float64) {
 	return d.Rgb.RgbToLab(r, g, b)
 }
 
 // HsvRgb Converting from Hsv to Rgb
-func HsvRgb(d *colorBank.DmcColors, h float64, s float64, v float64) (float64, float64, float64) {
+func HsvRgb(d *cb.DmcColors, h float64, s float64, v float64) (float64, float64, float64) {
 	return d.Hsv.HsvToRgb(h, s, v)
 }
 
 // HsvLab Converting from Hsv to Lab
-func HsvLab(d *colorBank.DmcColors, h float64, s float64, v float64) (float64, float64, float64) {
+func HsvLab(d *cb.DmcColors, h float64, s float64, v float64) (float64, float64, float64) {
 	return d.Hsv.HsvToLab(h, s, v)
 }
 
 // HsvHex Converting from Hsv to Hex
-func HsvHex(d *colorBank.DmcColors, h float64, s float64, v float64) string {
+func HsvHex(d *cb.DmcColors, h float64, s float64, v float64) string {
 	return d.Hsv.HsvToHex(h, s, v)
 }
 
 // LabRgb Converting from Lab to Rgb
-func LabRgb(d *colorBank.DmcColors, l float64, a float64, b float64) (float64, float64, float64) {
+func LabRgb(d *cb.DmcColors, l float64, a float64, b float64) (float64, float64, float64) {
 	return d.Lab.LabToRgb(l, a, b)
 }
 
 // LabHsv Converting from Lab to Hsv
-func LabHsv(d *colorBank.DmcColors, l float64, a float64, b float64) (float64, float64, float64) {
+func LabHsv(d *cb.DmcColors, l float64, a float64, b float64) (float64, float64, float64) {
 	return d.Lab.LabToHsv(l, a, b)
 }
 
 // LabHex Converting from Lab to Hex
-func LabHex(d *colorBank.DmcColors, l float64, a float64, b float64) string {
+func LabHex(d *cb.DmcColors, l float64, a float64, b float64) string {
 	return d.Lab.LabToHex(l, a, b)
 }
 

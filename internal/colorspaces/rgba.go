@@ -1,4 +1,4 @@
-package dmc
+package colorspaces
 
 import (
 	"image/color"

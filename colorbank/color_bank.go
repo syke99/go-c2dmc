@@ -1,4 +1,4 @@
-// Package colorBank provides a bank of colors who's rbg values already correspond to DMC string color values
+// Package colorbank provides a bank of colors who's rbg values already correspond to DMC string color values
 // These values are used in dmc.go to find the closest matching dmc color to
 // the given rgb value
 package colorBank
@@ -6,16 +6,18 @@ package colorBank
 import (
 	"net/http"
 
+	"github.com/syke99/go-c2dmc/internal/colorspaces/hex"
+	"github.com/syke99/go-c2dmc/internal/colorspaces/hsv"
+	"github.com/syke99/go-c2dmc/internal/colorspaces/lab"
+	"github.com/syke99/go-c2dmc/internal/colorspaces/rgb"
+
+	"github.com/syke99/go-c2dmc/internal/pkg"
+
 	"github.com/PuerkitoBio/goquery"
-	"github.com/syke99/go-c2dmc/colorspaces"
-	"github.com/syke99/go-c2dmc/colorspaces/hex"
-	"github.com/syke99/go-c2dmc/colorspaces/hsv"
-	"github.com/syke99/go-c2dmc/colorspaces/lab"
-	"github.com/syke99/go-c2dmc/colorspaces/rgb"
 )
 
 type DmcColors struct {
-	ColorBank []colorspaces.DefColor
+	ColorBank []pkg.DefColor
 	HexMap    map[string]string
 	Rgb       rgb.Rgb
 	Hex       hex.Hex
@@ -37,10 +39,10 @@ func New() *DmcColors {
 	return colors
 }
 
-func fillColorBank() []colorspaces.DefColor {
-	var colorBank []colorspaces.DefColor
+func fillColorBank() []pkg.DefColor {
+	var colorBank []pkg.DefColor
 
-	page := "https://floss.maxxmint.com/dmc_to_rgb.php"
+	page := pkg.Page
 	resp, err := http.Get(page)
 	if err != nil {
 		println(err.Error())
@@ -55,7 +57,7 @@ func fillColorBank() []colorspaces.DefColor {
 
 	println(doc.Find("tbody").Children().Each(func(i int, s *goquery.Selection) {
 		if i == 1 {
-			dc := colorspaces.DefColor{}
+			dc := pkg.DefColor{}
 			println(s.Children().Each(func(i int, s *goquery.Selection) {
 				switch i {
 				case 1:
@@ -79,7 +81,7 @@ func fillColorBank() []colorspaces.DefColor {
 	return colorBank
 }
 
-func fillHexMap(colorBank []colorspaces.DefColor) map[string]string {
+func fillHexMap(colorBank []pkg.DefColor) map[string]string {
 
 	colorMap := make(map[string]string)
 

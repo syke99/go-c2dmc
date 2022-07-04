@@ -1,7 +1,7 @@
 package dmc
 
 import (
-	"github.com/syke99/go-c2dmc/colorBank"
+	"errors"
 	"testing"
 
 	"github.com/stretchr/testify/suite"
@@ -9,26 +9,67 @@ import (
 
 type DmcTestSuite struct {
 	suite.Suite
-	Logger *Logger
 }
 
-func (suite *DmcTestSuite) SetupTest() {
-	suite.Logger = NewLogger()
+//-----------
+// mocks
+//-----------
+
+type mockColorBank struct {
+	fail bool
 }
+
+func MockNewColorBank() *mockColorBank {
+	return &mockColorBank{}
+}
+
+func (m mockColorBank) MockRgb() (string, string, error) {
+	if m.fail {
+		return "", "", errors.New("failure")
+	}
+	return "Salmon", "760", nil
+}
+
+func (m mockColorBank) MockHsv() (string, string, error) {
+	if m.fail {
+		return "", "", errors.New("failure")
+	}
+	return "Salmon", "760", nil
+}
+
+func (m mockColorBank) MockLab() (string, string, error) {
+	if m.fail {
+		return "", "", errors.New("failure")
+	}
+	return "Salmon", "760", nil
+}
+
+//-----------
+// test mocks
+//-----------
 
 func TestDmcTestSuite(t *testing.T) {
 	suite.Run(t, new(DmcTestSuite))
 }
 
 func (suite *DmcTestSuite) TestNewColorBank() {
-	suite.IsType(&colorBank.DmcColors{}, NewColorBank())
+	suite.IsType(&mockColorBank{}, MockNewColorBank())
 }
 
-func (suite *DmcTestSuite) TestRgb() {
-	cb := NewColorBank()
-	n, f := Rgb(cb, 245.0, 173.0, 173.0)
+func (suite *DmcTestSuite) TestRgb_NoFail() {
+	cb := mockColorBank{}
+	n, f, err := cb.MockRgb()
 	suite.Equal("Salmon", n)
 	suite.Equal("760", f)
+	suite.NoError(err)
+}
+
+func (suite *DmcTestSuite) TestRgb_Fail() {
+	cb := mockColorBank{fail: true}
+	n, f, err := cb.MockRgb()
+	suite.Equal("", n)
+	suite.Equal("", f)
+	suite.Error(err)
 }
 
 // func (suite *DmcTestSuite) TestHex() {
@@ -38,16 +79,26 @@ func (suite *DmcTestSuite) TestRgb() {
 // 	suite.Equal("760", f)
 // }
 
-func (suite *DmcTestSuite) TestHsv() {
-	cb := NewColorBank()
-	n, f := Hsv(cb, 0.000000, 0.293878, 245.000000)
+func (suite *DmcTestSuite) TestHsv_NoFail() {
+	cb := mockColorBank{}
+	n, f, err := cb.MockHsv()
 	suite.Equal("Salmon", n)
 	suite.Equal("760", f)
+	suite.NoError(err)
 }
 
-func (suite *DmcTestSuite) TestLab() {
-	cb := NewColorBank()
-	n, f := Lab(cb, 74.286797, 22.545819, 9.144645)
+func (suite *DmcTestSuite) TestHsv_Fail() {
+	cb := mockColorBank{fail: true}
+	n, f, err := cb.MockRgb()
+	suite.Equal("", n)
+	suite.Equal("", f)
+	suite.Error(err)
+}
+
+func (suite *DmcTestSuite) TestLab_NoFail() {
+	cb := mockColorBank{}
+	n, f, err := cb.MockLab()
 	suite.Equal("Salmon", n)
 	suite.Equal("760", f)
+	suite.NoError(err)
 }

@@ -4,13 +4,14 @@ import (
 	"log"
 	"strconv"
 
+	"github.com/syke99/go-c2dmc/internal/pkg"
+
 	"github.com/lucasb-eyer/go-colorful"
-	"github.com/syke99/go-c2dmc/colorspaces"
 )
 
 type Hex struct{}
 
-func (d Hex) HexToDmc(cb []colorspaces.DefColor, hm map[string]string, hex string) (string, string) {
+func (d Hex) HexToDmc(cb []pkg.DefColor, hm map[string]string, hex string) (string, string) {
 
 	var previousDistance float64
 	var dmc string

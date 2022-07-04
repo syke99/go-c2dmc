@@ -3,13 +3,14 @@ package rgb
 import (
 	"strconv"
 
+	"github.com/syke99/go-c2dmc/internal/pkg"
+
 	"github.com/lucasb-eyer/go-colorful"
-	"github.com/syke99/go-c2dmc/colorspaces"
 )
 
 type Rgb struct{}
 
-func (d Rgb) RgbToDmc(cb []colorspaces.DefColor, hm map[string]string, r float64, g float64, b float64) (string, string) {
+func (d Rgb) RgbToDmc(cb []pkg.DefColor, hm map[string]string, r float64, g float64, b float64) (string, string) {
 
 	var previousDistance float64
 	var dmc string

@@ -1,4 +1,4 @@
-package colorspaces
+package pkg
 
 type DefColor struct {
 	ColorName string
