@@ -57,9 +57,9 @@ DMC Color Name: Salmon, Floss number: 760
 And then converting this RGB color into LAB and HSV colorspaces, as well as hexcode:
 
 ```go
-lab := cb.RgbLab(245.0, 173.0, 173.0)
-hsv := cb.RgbHsv(245.0, 173.0, 173.0)
-hexcode := cb.RgbHex(245.0, 173.0, 173.0)
+lab := RgbLab(cb, 245.0, 173.0, 173.0)
+hsv := RgbHsv(cb, 245.0, 173.0, 173.0)
+hexcode := RgbHex(cb, 245.0, 173.0, 173.0)
 ```
 
 **!!NOTE!!**
