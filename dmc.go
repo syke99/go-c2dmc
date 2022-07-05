@@ -8,37 +8,50 @@ import (
 	"github.com/syke99/go-c2dmc/internal/colorspaces"
 )
 
-func NewColorBank() *cb.DmcColors {
-	return cb.New(nil)
+// ColorBank is the color bank used for comparing colors, either with
+// the full list of DMC thread colors, or filtered with a FilterOption
+type ColorBank struct {
+	// ColorBank contains filtered or unexported fields
+	bank *cb.DmcColors
 }
 
-func NewColorBankWithFilter(fltr filter.FilterOption) *cb.DmcColors {
-	return cb.New(fltr)
+// NewColorBank returns a ColorBank without a filter
+func NewColorBank() ColorBank {
+	return ColorBank{
+		bank: cb.New(nil),
+	}
+}
+
+// NewColorBankWithFilter returns a ColorBank with the filter that is passed in
+func NewColorBankWithFilter(fltr filter.FilterOption) ColorBank {
+	return ColorBank{
+		bank: cb.New(fltr),
+	}
 }
 
 // RgbA Determine DMC color from RBG (Red, Green, Blue) values
-func RgbA(col color.Color) (float64, float64, float64) {
+func (cb ColorBank) RgbA(col color.Color) (float64, float64, float64) {
 	return colorspaces.RgbaToRgb(col)
 }
 
 // Rgb Determine DMC color from RBG (Red, Green, Blue) values
-func Rgb(d *cb.DmcColors, r float64, g float64, b float64) (string, string) {
-	return d.Rgb.RgbToDmc(d.ColorBank, d.HexMap, r, g, b)
+func (cb ColorBank) Rgb(r float64, g float64, b float64) (string, string) {
+	return cb.bank.Rgb.RgbToDmc(cb.bank.ColorBank, cb.bank.HexMap, r, g, b)
 }
 
 // Hex Determine DMC color from Hex value
-func Hex(d *cb.DmcColors, hex string) (string, string) {
-	return d.Hex.HexToDmc(d.ColorBank, d.HexMap, hex)
+func (cb ColorBank) Hex(hex string) (string, string) {
+	return cb.bank.Hex.HexToDmc(cb.bank.ColorBank, cb.bank.HexMap, hex)
 }
 
 // Hsv Determine DMC color from HSV (Hue, Saturation, Value) values
-func Hsv(d *cb.DmcColors, h float64, s float64, v float64) (string, string) {
-	return d.Hsv.HsvToDmc(d.ColorBank, d.HexMap, h, s, v)
+func (cb ColorBank) Hsv(h float64, s float64, v float64) (string, string) {
+	return cb.bank.Hsv.HsvToDmc(cb.bank.ColorBank, cb.bank.HexMap, h, s, v)
 }
 
 // Lab Determine DMC color from HSV (Hue, Saturation, Value) values
-func Lab(d *cb.DmcColors, l float64, a float64, b float64) (string, string) {
-	return d.Lab.LabToDmc(d.ColorBank, d.HexMap, l, a, b)
+func (cb ColorBank) Lab(l float64, a float64, b float64) (string, string) {
+	return cb.bank.Lab.LabToDmc(cb.bank.ColorBank, cb.bank.HexMap, l, a, b)
 }
 
 // For convenience's sake, dmc provides the below functions for converting the four
@@ -47,48 +60,48 @@ func Lab(d *cb.DmcColors, l float64, a float64, b float64) (string, string) {
 // the package github.com/lucasb-eyer/go-colorful
 
 // RgbHex Converting from Rgb to Hex
-func RgbHex(d *cb.DmcColors, r float64, g float64, b float64) string {
-	return d.Rgb.RgbToHex(r, g, b)
+func (cb ColorBank) RgbHex(r float64, g float64, b float64) string {
+	return cb.bank.Rgb.RgbToHex(r, g, b)
 }
 
 // RgbHsv Converting from Rgb to Hsv
-func RgbHsv(d *cb.DmcColors, r float64, g float64, b float64) (float64, float64, float64) {
-	return d.Rgb.RgbToHsv(r, g, b)
+func (cb ColorBank) RgbHsv(r float64, g float64, b float64) (float64, float64, float64) {
+	return cb.bank.Rgb.RgbToHsv(r, g, b)
 }
 
 // RgbLab Converting from Rgb to Lab
-func RgbLab(d *cb.DmcColors, r float64, g float64, b float64) (float64, float64, float64) {
-	return d.Rgb.RgbToLab(r, g, b)
+func (cb ColorBank) RgbLab(r float64, g float64, b float64) (float64, float64, float64) {
+	return cb.bank.Rgb.RgbToLab(r, g, b)
 }
 
 // HsvRgb Converting from Hsv to Rgb
-func HsvRgb(d *cb.DmcColors, h float64, s float64, v float64) (float64, float64, float64) {
-	return d.Hsv.HsvToRgb(h, s, v)
+func (cb ColorBank) HsvRgb(h float64, s float64, v float64) (float64, float64, float64) {
+	return cb.bank.Hsv.HsvToRgb(h, s, v)
 }
 
 // HsvLab Converting from Hsv to Lab
-func HsvLab(d *cb.DmcColors, h float64, s float64, v float64) (float64, float64, float64) {
-	return d.Hsv.HsvToLab(h, s, v)
+func (cb ColorBank) HsvLab(h float64, s float64, v float64) (float64, float64, float64) {
+	return cb.bank.Hsv.HsvToLab(h, s, v)
 }
 
 // HsvHex Converting from Hsv to Hex
-func HsvHex(d *cb.DmcColors, h float64, s float64, v float64) string {
-	return d.Hsv.HsvToHex(h, s, v)
+func (cb ColorBank) HsvHex(h float64, s float64, v float64) string {
+	return cb.bank.Hsv.HsvToHex(h, s, v)
 }
 
 // LabRgb Converting from Lab to Rgb
-func LabRgb(d *cb.DmcColors, l float64, a float64, b float64) (float64, float64, float64) {
-	return d.Lab.LabToRgb(l, a, b)
+func (cb ColorBank) LabRgb(l float64, a float64, b float64) (float64, float64, float64) {
+	return cb.bank.Lab.LabToRgb(l, a, b)
 }
 
 // LabHsv Converting from Lab to Hsv
-func LabHsv(d *cb.DmcColors, l float64, a float64, b float64) (float64, float64, float64) {
-	return d.Lab.LabToHsv(l, a, b)
+func (cb ColorBank) LabHsv(l float64, a float64, b float64) (float64, float64, float64) {
+	return cb.bank.Lab.LabToHsv(l, a, b)
 }
 
 // LabHex Converting from Lab to Hex
-func LabHex(d *cb.DmcColors, l float64, a float64, b float64) string {
-	return d.Lab.LabToHex(l, a, b)
+func (cb ColorBank) LabHex(l float64, a float64, b float64) string {
+	return cb.bank.Lab.LabToHex(l, a, b)
 }
 
 // The methods below for convertiong from Hex to RGB/LAB/HSV colorspaces
