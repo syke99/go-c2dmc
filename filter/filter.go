@@ -7,13 +7,17 @@ type FilterOption map[string]interface{}
 // Sepia returns a filter option for filtering to a sepia color scheme
 var Sepia = func(colors ...string) FilterOption {
 	// TODO: populate map with Sepia colors
-	return map[string]interface{}{}
+	sepiaMap := map[string]interface{}{}
+
+	return sepiaMap
 }
 
 // GreyScale returns a filter option for filtering to a greyscale color scheme
 var GreyScale = func(colors ...string) FilterOption {
 	// TODO: populate map with GreyScale colors
-	return map[string]interface{}{}
+	greyscaleMap := map[string]interface{}{}
+
+	return greyscaleMap
 }
 
 // CustomColorFilter returns a filter option for filtering to a custom color scheme
