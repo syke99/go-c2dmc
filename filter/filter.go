@@ -1,6 +1,6 @@
 package filter
 
-// FilterOption returns a filter for filtering the colors
+// FilterOption A filter for filtering the colors
 // populating the color bank when calling dmc.NewColorBankWithFilter
 type FilterOption map[string]interface{}
 

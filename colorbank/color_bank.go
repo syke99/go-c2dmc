@@ -57,11 +57,10 @@ func fillColorBank(fltr filter.FilterOption) []pkg.DefColor {
 
 	if fltr == nil {
 		colorBank = fillColorBankNoFilter(doc, colorBank)
+		return colorBank
 	}
 
-	if fltr != nil {
-		colorBank = fillColorBankWithFilter(doc, colorBank, fltr)
-	}
+	colorBank = fillColorBankWithFilter(doc, colorBank, fltr)
 
 	return colorBank
 }
@@ -95,7 +94,7 @@ func fillColorBankNoFilter(doc *goquery.Document, colorBank []pkg.DefColor) []pk
 
 func fillColorBankWithFilter(doc *goquery.Document, colorBank []pkg.DefColor, fltr filter.FilterOption) []pkg.DefColor {
 	filterFunc := func(i int, sel *goquery.Selection) bool {
-		if _, ok := fltr[sel.Text()]; ok {
+		if _, ok := fltr[sel.Children().First().Text()]; ok {
 			return true
 		}
 		return false
