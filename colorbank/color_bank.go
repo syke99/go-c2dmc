@@ -4,6 +4,7 @@
 package colorBank
 
 import (
+	"github.com/syke99/go-c2dmc/filter"
 	"net/http"
 
 	"github.com/syke99/go-c2dmc/internal/colorspaces/hex"
@@ -25,8 +26,8 @@ type DmcColors struct {
 	Lab       lab.Lab
 }
 
-func New() *DmcColors {
-	cb := fillColorBank()
+func New(filter filter.FilterOption) *DmcColors {
+	cb := fillColorBank(filter)
 	hm := fillHexMap(cb)
 	colors := &DmcColors{
 		ColorBank: cb,
@@ -39,7 +40,7 @@ func New() *DmcColors {
 	return colors
 }
 
-func fillColorBank() []pkg.DefColor {
+func fillColorBank(filter filter.FilterOption) []pkg.DefColor {
 	var colorBank []pkg.DefColor
 
 	page := pkg.Page
@@ -55,6 +56,14 @@ func fillColorBank() []pkg.DefColor {
 		println(err.Error())
 	}
 
+	if filter == nil {
+		fillColorBankNoFilter(doc, colorBank)
+	}
+
+	return colorBank
+}
+
+func fillColorBankNoFilter(doc *goquery.Document, colorBank []pkg.DefColor) []pkg.DefColor {
 	doc.Find("tbody").Children().Each(func(i int, s *goquery.Selection) {
 		if i >= 1 {
 			dc := pkg.DefColor{}
