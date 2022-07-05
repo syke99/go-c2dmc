@@ -16,41 +16,41 @@ type ColorBank struct {
 }
 
 // NewColorBank returns a ColorBank without a filter
-func NewColorBank() ColorBank {
-	return ColorBank{
+func NewColorBank() *ColorBank {
+	return &ColorBank{
 		bank: cb.New(nil),
 	}
 }
 
 // NewColorBankWithFilter returns a ColorBank with the filter that is passed in
-func NewColorBankWithFilter(fltr filter.FilterOption) ColorBank {
-	return ColorBank{
+func NewColorBankWithFilter(fltr filter.FilterOption) *ColorBank {
+	return &ColorBank{
 		bank: cb.New(fltr),
 	}
 }
 
 // RgbA Determine DMC color from RBG (Red, Green, Blue) values
-func (cb ColorBank) RgbA(col color.Color) (float64, float64, float64) {
+func (cb *ColorBank) RgbA(col color.Color) (float64, float64, float64) {
 	return colorspaces.RgbaToRgb(col)
 }
 
 // Rgb Determine DMC color from RBG (Red, Green, Blue) values
-func (cb ColorBank) Rgb(r float64, g float64, b float64) (string, string) {
+func (cb *ColorBank) Rgb(r float64, g float64, b float64) (string, string) {
 	return cb.bank.Rgb.RgbToDmc(cb.bank.ColorBank, cb.bank.HexMap, r, g, b)
 }
 
 // Hex Determine DMC color from Hex value
-func (cb ColorBank) Hex(hex string) (string, string) {
+func (cb *ColorBank) Hex(hex string) (string, string) {
 	return cb.bank.Hex.HexToDmc(cb.bank.ColorBank, cb.bank.HexMap, hex)
 }
 
 // Hsv Determine DMC color from HSV (Hue, Saturation, Value) values
-func (cb ColorBank) Hsv(h float64, s float64, v float64) (string, string) {
+func (cb *ColorBank) Hsv(h float64, s float64, v float64) (string, string) {
 	return cb.bank.Hsv.HsvToDmc(cb.bank.ColorBank, cb.bank.HexMap, h, s, v)
 }
 
 // Lab Determine DMC color from HSV (Hue, Saturation, Value) values
-func (cb ColorBank) Lab(l float64, a float64, b float64) (string, string) {
+func (cb *ColorBank) Lab(l float64, a float64, b float64) (string, string) {
 	return cb.bank.Lab.LabToDmc(cb.bank.ColorBank, cb.bank.HexMap, l, a, b)
 }
 
@@ -60,47 +60,47 @@ func (cb ColorBank) Lab(l float64, a float64, b float64) (string, string) {
 // the package github.com/lucasb-eyer/go-colorful
 
 // RgbHex Converting from Rgb to Hex
-func (cb ColorBank) RgbHex(r float64, g float64, b float64) string {
+func (cb *ColorBank) RgbHex(r float64, g float64, b float64) string {
 	return cb.bank.Rgb.RgbToHex(r, g, b)
 }
 
 // RgbHsv Converting from Rgb to Hsv
-func (cb ColorBank) RgbHsv(r float64, g float64, b float64) (float64, float64, float64) {
+func (cb *ColorBank) RgbHsv(r float64, g float64, b float64) (float64, float64, float64) {
 	return cb.bank.Rgb.RgbToHsv(r, g, b)
 }
 
 // RgbLab Converting from Rgb to Lab
-func (cb ColorBank) RgbLab(r float64, g float64, b float64) (float64, float64, float64) {
+func (cb *ColorBank) RgbLab(r float64, g float64, b float64) (float64, float64, float64) {
 	return cb.bank.Rgb.RgbToLab(r, g, b)
 }
 
 // HsvRgb Converting from Hsv to Rgb
-func (cb ColorBank) HsvRgb(h float64, s float64, v float64) (float64, float64, float64) {
+func (cb *ColorBank) HsvRgb(h float64, s float64, v float64) (float64, float64, float64) {
 	return cb.bank.Hsv.HsvToRgb(h, s, v)
 }
 
 // HsvLab Converting from Hsv to Lab
-func (cb ColorBank) HsvLab(h float64, s float64, v float64) (float64, float64, float64) {
+func (cb *ColorBank) HsvLab(h float64, s float64, v float64) (float64, float64, float64) {
 	return cb.bank.Hsv.HsvToLab(h, s, v)
 }
 
 // HsvHex Converting from Hsv to Hex
-func (cb ColorBank) HsvHex(h float64, s float64, v float64) string {
+func (cb *ColorBank) HsvHex(h float64, s float64, v float64) string {
 	return cb.bank.Hsv.HsvToHex(h, s, v)
 }
 
 // LabRgb Converting from Lab to Rgb
-func (cb ColorBank) LabRgb(l float64, a float64, b float64) (float64, float64, float64) {
+func (cb *ColorBank) LabRgb(l float64, a float64, b float64) (float64, float64, float64) {
 	return cb.bank.Lab.LabToRgb(l, a, b)
 }
 
 // LabHsv Converting from Lab to Hsv
-func (cb ColorBank) LabHsv(l float64, a float64, b float64) (float64, float64, float64) {
+func (cb *ColorBank) LabHsv(l float64, a float64, b float64) (float64, float64, float64) {
 	return cb.bank.Lab.LabToHsv(l, a, b)
 }
 
 // LabHex Converting from Lab to Hex
-func (cb ColorBank) LabHex(l float64, a float64, b float64) string {
+func (cb *ColorBank) LabHex(l float64, a float64, b float64) string {
 	return cb.bank.Lab.LabToHex(l, a, b)
 }
 
