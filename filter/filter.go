@@ -2,22 +2,22 @@ package filter
 
 // FilterOption returns a filter for filtering the colors
 // populating the color bank when calling dmc.NewColorBankWithFilter
-type FilterOption func(colors ...string) map[string]interface{}
+type FilterOption map[string]interface{}
 
 // Sepia returns a filter option for filtering to a sepia color scheme
-var Sepia FilterOption = func(colors ...string) map[string]interface{} {
+var Sepia = func(colors ...string) FilterOption {
 	// TODO: populate map with Sepia colors
 	return map[string]interface{}{}
 }
 
 // GreyScale returns a filter option for filtering to a greyscale color scheme
-var GreyScale FilterOption = func(colors ...string) map[string]interface{} {
+var GreyScale = func(colors ...string) FilterOption {
 	// TODO: populate map with GreyScale colors
 	return map[string]interface{}{}
 }
 
 // CustomColorFilter returns a filter option for filtering to a custom color scheme
-var CustomColorFilter FilterOption = func(colors ...string) map[string]interface{} {
+var CustomColorFilter = func(colors ...string) FilterOption {
 	colorMap := map[string]interface{}{}
 
 	for _, color := range colors {

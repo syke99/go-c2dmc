@@ -1,10 +1,10 @@
 package dmc
 
 import (
-	"github.com/syke99/go-c2dmc/filter"
 	"image/color"
 
 	cb "github.com/syke99/go-c2dmc/colorbank"
+	"github.com/syke99/go-c2dmc/filter"
 	"github.com/syke99/go-c2dmc/internal/colorspaces"
 )
 
@@ -12,8 +12,8 @@ func NewColorBank() *cb.DmcColors {
 	return cb.New(nil)
 }
 
-func NewColorBankWithFilter(filter filter.FilterOption) *cb.DmcColors {
-	return cb.New(filter)
+func NewColorBankWithFilter(fltr filter.FilterOption) *cb.DmcColors {
+	return cb.New(fltr)
 }
 
 // RgbA Determine DMC color from RBG (Red, Green, Blue) values
