@@ -20,10 +20,18 @@ var GreyScale = func(colors ...string) FilterOption {
 	return greyscaleMap
 }()
 
-// CustomColorFilter returns a filter option for filtering to a custom color scheme
-var CustomColorFilter = func(colors ...string) FilterOption {
-	colorMap := map[string]interface{}{}
+// CustomColorFilter returns a filter option for filtering to a custom color scheme;
+// you can also use CustomColorFilter to extend previously created filters with newly
+// included colors
+var CustomColorFilter = func(fltr FilterOption, colors ...string) FilterOption {
+	var colorMap map[string]interface{}
 	var dud interface{}
+
+	if fltr == nil {
+		colorMap = map[string]interface{}{}
+	}
+
+	colorMap = fltr
 
 	for _, color := range colors {
 		colorMap[color] = dud
