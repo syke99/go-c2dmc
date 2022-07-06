@@ -20,22 +20,43 @@ var GreyScale = func(colors ...string) FilterOption {
 	return greyscaleMap
 }()
 
-// CustomColorFilter returns a filter option for filtering to a custom color scheme;
-// you can also use CustomColorFilter to extend previously created filters with newly
-// included colors
-var CustomColorFilter = func(fltr FilterOption, colors ...string) FilterOption {
+// CustomFilter returns a filter option for filtering to a custom color scheme
+var CustomFilter = func(colors ...string) FilterOption {
 	var colorMap map[string]interface{}
 	var dud interface{}
-
-	if fltr == nil {
-		colorMap = map[string]interface{}{}
-	}
-
-	colorMap = fltr
 
 	for _, color := range colors {
 		colorMap[color] = dud
 	}
 
 	return colorMap
+}
+
+// ExtendFilter allows you to extend previously created filters with other filters
+// and newly included colors
+var ExtendFilter = func(baseFilter FilterOption, additionalFilters []FilterOption, colors ...string) FilterOption {
+	var dud interface{}
+
+	// loop over all additionalFilters (any previously
+	// instantiated filter)
+	for _, additionalFilter := range additionalFilters {
+		// loop over every color in the additionalFilter
+		for color, _ := range additionalFilter {
+			// if the color doesn't exist in the baseFilter
+			// add it
+			if _, ok := baseFilter[color]; !ok {
+				baseFilter[color] = dud
+			}
+		}
+	}
+
+	for _, color := range colors {
+		// if the color doesn't exist in the baseFilter
+		// add it
+		if _, ok := baseFilter[color]; !ok {
+			baseFilter[color] = dud
+		}
+	}
+
+	return baseFilter
 }
