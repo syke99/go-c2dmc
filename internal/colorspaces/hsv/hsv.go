@@ -76,7 +76,7 @@ func (d Hsv) HsvToDmc(cbm map[string]pkg.DefColor, h float64, s float64, v float
 
 }
 
-// Convenience functions for convertion HSV colors to other color spaces
+// Convenience functions for conversion HSV colors to other color spaces
 func (d Hsv) HsvToRgb(h float64, s float64, v float64) (float64, float64, float64) {
 	c := colorful.Hsv(h, s, v)
 

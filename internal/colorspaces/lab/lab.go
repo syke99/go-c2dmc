@@ -75,7 +75,7 @@ func (d Lab) LabToDmc(cbm map[string]pkg.DefColor, l float64, a float64, b float
 
 }
 
-// Convenience functions for convertion LAB colors to other color spaces
+// Convenience functions for conversion LAB colors to other color spaces
 func (d Lab) LabToRgb(l float64, a float64, b float64) (float64, float64, float64) {
 	c := colorful.Lab(l, a, b)
 

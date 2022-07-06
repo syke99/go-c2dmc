@@ -77,7 +77,7 @@ func (d Hex) HexToDmc(cbm map[string]pkg.DefColor, hex string) (string, string) 
 // Below methods for converting Hex to RGB/LAB/HSV colorspaces currently not
 // working. Will be implemented in v2
 
-// Convenience functions for convertion Hexcode color values to other color spaces
+// Convenience functions for conversion Hexcode color values to other color spaces
 func (d Hex) HexToRgb(hex string) (float64, float64, float64) {
 	c, err := colorful.Hex(hex)
 	if err != nil {
