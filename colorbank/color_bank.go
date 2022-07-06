@@ -17,8 +17,7 @@ import (
 )
 
 type DmcColors struct {
-	ColorBank []pkg.DefColor
-	HexMap    map[string]string
+	ColorBank map[string]pkg.DefColor
 	Rgb       rgb.Rgb
 	Hex       hex.Hex
 	Hsv       hsv.Hsv
@@ -27,10 +26,9 @@ type DmcColors struct {
 
 func New(filter filter.FilterOption) *DmcColors {
 	cb := fillColorBank(filter)
-	hm := fillHexMap(cb)
+	cbm := fillHexMap(cb)
 	colors := &DmcColors{
-		ColorBank: cb,
-		HexMap:    hm,
+		ColorBank: cbm,
 		Rgb:       rgb.Rgb{},
 		Hex:       hex.Hex{},
 		Hsv:       hsv.Hsv{},
@@ -126,12 +124,12 @@ func fillColorBankWithFilter(doc *goquery.Document, colorBank []pkg.DefColor, fl
 	return colorBank
 }
 
-func fillHexMap(colorBank []pkg.DefColor) map[string]string {
+func fillHexMap(colorBank []pkg.DefColor) map[string]pkg.DefColor {
 
-	colorMap := make(map[string]string)
+	colorMap := make(map[string]pkg.DefColor)
 
-	for _, c := range colorBank {
-		colorMap[c.Hex] = c.ColorName
+	for _, color := range colorBank {
+		colorMap[color.Hex] = color
 	}
 
 	return colorMap

@@ -36,22 +36,22 @@ func (cb *ColorBank) RgbA(col color.Color) (float64, float64, float64) {
 
 // Rgb Determine DMC color from RBG (Red, Green, Blue) values
 func (cb *ColorBank) Rgb(r float64, g float64, b float64) (string, string) {
-	return cb.bank.Rgb.RgbToDmc(cb.bank.ColorBank, cb.bank.HexMap, r, g, b)
+	return cb.bank.Rgb.RgbToDmc(cb.bank.ColorBank, r, g, b)
 }
 
 // Hex Determine DMC color from Hex value
 func (cb *ColorBank) Hex(hex string) (string, string) {
-	return cb.bank.Hex.HexToDmc(cb.bank.ColorBank, cb.bank.HexMap, hex)
+	return cb.bank.Hex.HexToDmc(cb.bank.ColorBank, hex)
 }
 
 // Hsv Determine DMC color from HSV (Hue, Saturation, Value) values
 func (cb *ColorBank) Hsv(h float64, s float64, v float64) (string, string) {
-	return cb.bank.Hsv.HsvToDmc(cb.bank.ColorBank, cb.bank.HexMap, h, s, v)
+	return cb.bank.Hsv.HsvToDmc(cb.bank.ColorBank, h, s, v)
 }
 
 // Lab Determine DMC color from HSV (Hue, Saturation, Value) values
 func (cb *ColorBank) Lab(l float64, a float64, b float64) (string, string) {
-	return cb.bank.Lab.LabToDmc(cb.bank.ColorBank, cb.bank.HexMap, l, a, b)
+	return cb.bank.Lab.LabToDmc(cb.bank.ColorBank, l, a, b)
 }
 
 // For convenience's sake, dmc provides the below functions for converting the four
