@@ -66,7 +66,14 @@ func fillColorBank(fltr filter.FilterOption) []pkg.DefColor {
 func fillColorBankNoFilter(doc *goquery.Document, colorBank []pkg.DefColor) []pkg.DefColor {
 	doc.Find("tbody").Children().Each(func(i int, s *goquery.Selection) {
 		if i >= 1 {
-			dc := pkg.DefColor{}
+			dc := pkg.DefColor{
+				ColorName: "",
+				Floss:     "",
+				Hex:       "",
+				R:         "",
+				G:         "",
+				B:         "",
+			}
 			s.Children().Each(func(i int, s *goquery.Selection) {
 				switch i {
 				case 1:
@@ -100,7 +107,14 @@ func fillColorBankWithFilter(doc *goquery.Document, colorBank []pkg.DefColor, fl
 
 	doc.Find("tbody").Children().Each(func(i int, s *goquery.Selection) {
 		if i >= 1 {
-			dc := pkg.DefColor{}
+			dc := pkg.DefColor{
+				ColorName: "",
+				Floss:     "",
+				Hex:       "",
+				R:         "",
+				G:         "",
+				B:         "",
+			}
 			s.Children().FilterFunction(filterFunc).Each(func(i int, s *goquery.Selection) {
 				switch i {
 				case 1:
