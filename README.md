@@ -69,7 +69,7 @@ Converting from Hexcodes to RGB/LAB/HSV colorspaces is currently unusable, but w
 Who?
 ====
 
-This library was developed by Quinn Millican (@syke99)
+This library was developed by Quinn Millican ([@syke99](https://github.com/syke99))
 
 
 ## License
